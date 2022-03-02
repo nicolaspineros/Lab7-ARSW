@@ -23,7 +23,7 @@ apimock=(function(){
 				mockdata[authname].find(function(e){return e.name===bpname})
 			);
 		}
-	}	
+	}
 
 })();
 
