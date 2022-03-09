@@ -6,16 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet"
           href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <script src="js/apimock.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/apiclient.js"></script>
 </head>
 <body>
     <h1>Blueprints</h1>
     <div>
         <div>
-            <label for="author">Author</label>
+            <label for="author" id="aut">Author</label>
             <input type="text" id="author" name="author"><br>
             <input type="button" class="get-bp" value="Get blueprints">
             </br>
@@ -29,6 +32,11 @@
                 </tr>
                 </thead>
                 <tbody id="tb-body">
+                    <tr>
+                        <td id="nombreActor">Test</td>
+                        <td id="puntos">25</td>
+                        <td type="button" value=nombreActor onclick="app.drawBlueprint">Open</td>
+                    </tr>
                 </tbody>
             </table>
             </br>            

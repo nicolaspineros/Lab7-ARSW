@@ -6,14 +6,14 @@ app = (function (){
     var _setTable = function(blueprints) {
         var lista = blueprints.map(function(blueprint){
             return{
-                name: blueprint.name, nPoints: blueprint.points.length
+                name: blueprint.name, points: blueprint.points.length
             }});
         $("#tb-body").empty();
         lista.map(function(bp) {
-            $("#tb-body").append('<tr><td id="nameAuthor">'+bp.key+'</td><td id="points">'+bp.nPoints+'</td><td>')
+            $("#tb-body").append('<tr><td id="nameAuthor">'+bp.key+'</td><td id="points">'+bp.points+'</td><td type="button" onclick="app.drawBlueprint(\''+_author+'","'+bp.name+'\')">Open</td></tr>');
         });
 
-        var total = lista.reduce((vtotal, valor)=>{return vtotal + nPoints});
+        var total = lista.reduce((vtotal, valor)=>{return vtotal + valor});
         $("#puntosText").text("Total user points: "+total);
     };
 
@@ -25,8 +25,21 @@ app = (function (){
 
     var _drawBP = function(blueprint){
         $("#current").text("Current Blueprint: "+blueprint.name);
+        var points = blueprint.points;
         var canvas = document.getElementById("canvasBp");
         var ctx = c.getContext("2d");
+
+        ctx.clearRect(0,0,canvas.wigth,canvas.height);
+        ctx.beginPath();
+        ctx.moveTo(points[0].x, points[0].y);
+        points.forEach(
+			function(item, index) {
+				if (index > 0) {
+					ctx.lineTo(item.x, item.y);
+				}
+			}
+		);
+		ctx.stroke();
     };
 
     var drawBlueprint = function(author,bpName){
