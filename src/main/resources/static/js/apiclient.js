@@ -2,8 +2,7 @@ var apiclient = (function() {
 
 	const URL = "blueprints/";
 
-	var getBlueprintsByAuthor = function(name, callback) {
-		console.log("----- PETICIÓN HECHA CON GET! -----");
+	var getBlueprintsByAuthor = function(name, callback) {		
 		$.get(
 			URL + name,
 			function(response) {
