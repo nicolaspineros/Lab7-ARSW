@@ -8,6 +8,11 @@ apimock=(function(){
 	 {author:"johnconnor","points":[{"x":340,"y":240},{"x":15,"y":215}],"name":"gear"}];
 	mockdata["maryweyland"]=[{author:"maryweyland","points":[{"x":140,"y":140},{"x":115,"y":115}],"name":"house2"},
 	 {author:"maryweyland","points":[{"x":140,"y":140},{"x":115,"y":115}],"name":"gear2"}];
+    mockdata["Nicolas"]=[{author:"Nicolas","points":[{"x":10,"y":10},{"x":25,"y":25}],"name":"house2"},
+   	 {author:"Nicolas","points":[{"x":10,"y":10},{"x":25,"y":25}],"name":"gear2"}];
+   	mockdata["Juan"]=[{author:"Juan","points":[{"x":200,"y":200},{"x":54,"y":135}],"name":"house2"},
+     {author:"Juan","points":[{"x":200,"y":200},{"x":54,"y":135}],"name":"gear2"}];
+
 
 
 	return {

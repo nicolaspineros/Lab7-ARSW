@@ -8,6 +8,8 @@
     <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet"
           href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="js/apimock.js"></script>
+    <script src="js/app.js"></script>
 </head>
 <body>
     <h1>Blueprints</h1>
@@ -15,22 +17,26 @@
         <div>
             <label for="author">Author</label>
             <input type="text" id="author" name="author"><br>
-            <input type="button" value="Get blueprints">
+            <input type="button" class="get-bp" value="Get blueprints">
             </br>
-            <table>
+            <h2 class="subtittle" id="sb-author"></h2>
+            <table id="bptable" border="1px">
+                <thead>
                 <tr>
                     <th>Blueprint name</th>
                     <th>Number of points</th>
                     <th>Open</th>
                 </tr>
-                <tr>
-                    <td id="nombreBp">Ejemplo</td>
-                    <td id="puntos">10</td>
-                    <td type="button" value="nombreBp">Open</td>
-                </tr>
+                </thead>
+                <tbody id="tb-body">
+                </tbody>
             </table>
-            </br>
-            <label type="text" id="puntosText">0</label>
+            </br>            
+            <h2 class="subtittle" id="puntosText"></h2>
+            <div>
+                <h2 class="subtittle" id="current"></h2>
+                <canvas class="canvas" id="canvasBp" width="500" height="500" style="border: 1px;"></canvas>
+            </div>            
         </div>
     </div>
 </body>
