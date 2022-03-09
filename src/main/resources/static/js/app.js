@@ -7,20 +7,20 @@ app = (function (){
         var lista = blueprints.map(function(blueprint){
             return{
                 name: blueprint.name, points: blueprint.points.length
-            }});
+            }})
         $("#tb-body").empty();
         lista.map(function(bp) {
-            $("#tb-body").append('<tr><td id="nameAuthor">'+bp.key+'</td><td id="points">'+bp.points+'</td><td type="button" onclick="app.drawBlueprint(\''+_author+'","'+bp.name+'\')">Open</td></tr>');
+            $("#tb-body").append('<tr><td id="nameAuthor">'+bp.name+'</td><td id="points">'+bp.points+'</td><td type="button" onclick="app.drawBlueprint(\''+_author+'","'+bp.name+'\')">Open</td></tr>');
         });
 
-        var total = lista.reduce((vtotal, valor)=>{return vtotal + valor});
+        var total = lista.reduce((vtotal, {points})=>vtotal.points + points);
         $("#puntosText").text("Total user points: "+total);
     };
 
     var generateListBp = function(author) {
         _author = author;
         $("#sb-author").text(author+"'s Blueprints:");
-        apimock.getBlueprintsByAuthor(_author,_setTable);        
+        apimock.getBlueprintsByAuthor(author,_setTable);        
     };
 
     var _drawBP = function(blueprint){

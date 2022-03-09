@@ -20,7 +20,7 @@
         <div>
             <label for="author" id="aut">Author</label>
             <input type="text" id="author" name="author"><br>
-            <input type="button" class="get-bp" value="Get blueprints">
+            <input type="button" class="get-bp" value="Get blueprints" onclick="app.generateListBp(author.value)">
             </br>
             <h2 class="subtittle" id="sb-author">Blueprints</h2>
             <table id="bptable" border="1px">
@@ -35,7 +35,7 @@
                     <tr>
                         <td id="nombreActor">Test</td>
                         <td id="puntos">25</td>
-                        <td type="button" value=nombreActor onclick="app.drawBlueprint">Open</td>
+                        <td type="button" value=nombreActor onclick="app.drawBlueprint()">Open</td>
                     </tr>
                 </tbody>
             </table>
