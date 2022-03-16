@@ -1,21 +1,19 @@
 var apiclient = (function() {
 
-	const URL = "http://localhost:8080/blueprints/";
-
 	var getBlueprintsByAuthor = function(name, callback) {		
 		$.getJSON(
-			URL + name,
+			"http://localhost:8080/blueprints/" + name,
 			function(response) {
-				callback(response);
+				callback(null,response);
 			}
 		);
 	};
 
 	var getBlueprintsByNameAndAuthor = function(author, name, callback) {
 		$.getJSON(
-			URL + author + "/" + name,
+			"http://localhost:8080/blueprints/" + author + "/" + name,
 			function(response) {
-				callback(response);
+				callback(null,response);
 			}
 		);
 	};

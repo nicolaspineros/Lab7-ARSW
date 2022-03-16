@@ -18,7 +18,7 @@ apimock=(function(){
 	return {
 		getBlueprintsByAuthor:function(authname,callback){
 			callback(
-				mockdata[authname]
+				null,mockdata[authname]
 			);
 		},
 
@@ -27,6 +27,7 @@ apimock=(function(){
 			callback(
 				mockdata[authname].find(function(e){return e.name===bpname})
 			);
+			callback(null, e)
 		},
 
 	}

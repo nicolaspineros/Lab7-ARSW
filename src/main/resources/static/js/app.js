@@ -2,41 +2,47 @@
 app = (function (){
     var _author;
     var _blueprintName;
-    var _blueprints = [];
+    var _blueprints;
     var _newPoints = [];
     var url = "js/apiclient.js";
 
-    var _setTable = function(blueprints) {
-        var lista = blueprints.map(function(blueprint){
-            return{
-                name: blueprint.name, points: blueprint.points.length
-            }})
+    var _setTable = function(author,blueprints) {
+        _blueprints = [];
+        blueprints.map(function(blueprint){
+            _blueprints.push({name: blueprint.name, points: blueprint.points.length});
+        }); 
         $("#tb-body").empty();
-        lista.map(bp => {
-            $("#tb-body").append($('<tr><td id="nameAuthor">'+bp.name+'</td><td id="points">'+bp.points+'</td><td><button class="bt-bp">Open</button></td></tr>').on("click","button",() => drawBlueprint(_author,bp.name)));
+        _blueprints.map(bp => {
+            $("table").append($('<tr><td id="nameAuthor">'+bp.name+'</td><td id="points">'+bp.points+'</td><td><button class="bt-bp">Open</button></td></tr>').on("click","button",() => drawBlueprint(bp.name)));
         });
 
-        var total = lista.reduce((vtotal, {points})=>vtotal.points + points);
+        var total = _blueprints.reduce((vtotal, {points})=>vtotal.points + points);
         $("#puntosText").text("Total user points: "+total);
     };
 
-    var generateListBp = function(author) {
-        _author = author;        
-        //apimock.getBlueprintsByAuthor(author,_setTable);        
+    var generateListBp = function() {                
         $.getScript(url, function () {
-            $("#sb-author").text(author+"'s Blueprints:");
-            apiclient.getBlueprintsByAuthor(author,_setTable);
+            _author = $("#author").val();
+            $("#sb-author").text(_author+"'s Blueprints:");
+            apiclient.getBlueprintsByAuthor(_author,_setTable);
         });
     };
 
-    var _drawBP = function(blueprint){
+    var cleanCanvas = function () {
+        let c = document.getElementById("canvasBp");
+        let ctx = c.getContext("2d");
+        ctx.clearRect(0, 0, c.width, c.height);
+        ctx.beginPath();
+    };
+
+    var _drawBP = function(name,blueprint){
+        console.log("entra a drawBP"); 
         console.log(blueprint);
-        $("#current").text("Current Blueprint: "+blueprint.name);
+        $("#current").text("Current Blueprint: "+blueprint.name);        
         var points = blueprint.points;
         var canvas = document.getElementById("canvasBp");
-        var ctx = canvas.getContext("2d");          
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.beginPath();
+        var ctx = canvas.getContext("2d");   
+        cleanCanvas();       
         let initx = blueprint.points[0].x;
         let inity = blueprint.points[0].y;
         points.forEach(element => {            
@@ -47,12 +53,11 @@ app = (function (){
             inity = element.y;
         });                        
     };
-
-    var drawBlueprint = function(author,bpName){
-        _blueprintName = bpName;
-        //apimock.getBlueprintsByNameAndAuthor(author,bpName,_drawBP);
-        $.getScript(url,function(){ 
-            apiclient.getBlueprintsByNameAndAuthor(author,bpName,_drawBP);
+    
+    var drawBlueprint = function(bpName){
+        _blueprintName = bpName;                
+        $.getScript(url,function(){             
+            apiclient.getBlueprintsByNameAndAuthor(_author,bpName,_drawBP);
         });
     };
 
@@ -68,14 +73,14 @@ app = (function (){
     };
 
     var updateBlueprint = function () {
-        var oldBlueprint = mockdata.find((bp) => bp.name == _blueprintName); 
+        var oldBlueprint = _blueprints.find((bp) => bp.name == _blueprintName); 
         _newPoints.forEach((element) => {
           oldBlueprint.points.push({ x: element.x, y: element.y });
         });
-        apiclient.updateBlueprint(oldBlueprint, author, _blueprintName).then(
+        apiclient.updateBlueprint(oldBlueprint, _author, _blueprintName).then(
           function () {
-            getBlueprintsByAuthor();
-            getBlueprintsByNameAndAuthor(_blueprintName);
+            generateListBp();
+            drawBlueprint(_blueprintName);
           },
           function () {
             alert("failed!");
@@ -85,10 +90,10 @@ app = (function (){
 
     var addNewBlueprint = function () {
         _blueprintName = $("#newBlueprintName").val();
-        var newBlueprint = { author: author, name: _blueprintName, points: [] };
+        var newBlueprint = { author: _author, name: _blueprintName, points: [] };
         apiclient.addNewBlueprint(newBlueprint, author).then(
           function () {
-            getBlueprintsByAuthor();
+            generateListBp();
           },
           function () {
             alert("failed!");
@@ -97,13 +102,10 @@ app = (function (){
     };
     
     var deleteBlueprint = function () {
-        let c = document.getElementById("canvasBp");
-        let ctx = c.getContext("2d");
-        ctx.clearRect(0, 0, c.width, c.height);
-        ctx.beginPath();
-        apiclient.deleteBlueprint(author, _blueprintName).then(
+        cleanCanvas();
+        apiclient.deleteBlueprint(_author, _blueprintName).then(
           function () {
-            getBlueprintsByAuthor();
+            generateListBp();
           },
           function () {
             alert("failed!");
@@ -114,6 +116,7 @@ app = (function (){
     return{        
         generateListBp: generateListBp,
         drawBlueprint: drawBlueprint,
+        cleanCanvas: cleanCanvas,
         updateBlueprint: updateBlueprint,    
         addNewBlueprint: addNewBlueprint,
         deleteBlueprint: deleteBlueprint,

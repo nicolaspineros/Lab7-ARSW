@@ -34,9 +34,14 @@ h2 {
 	left: 45rem;
 }
 .get-bp{
-       	position: absolute;
-       	top:  5.5rem;
-       	left: 25rem;
+	background-color: #4caf50; 
+	color: white;
+	padding: 5px 20px;
+	text-align: center;
+	border: 1px solid black;
+	position: absolute;
+    top:  5.2rem;
+    left: 25rem;
 }
 
 #author{
@@ -56,18 +61,37 @@ h2 {
 
 #current {
 	position: absolute;
-	top: 4.5rem;
+	top: 1rem;
 	left: 45rem;
 }
 
 #saveBp {
-  background-color: #4caf50; /* Green */
-  border: none;
+  background-color: #4caf50; 
   color: white;
   padding: 10px 30px;
   text-align: center;
   border: 1px solid black;
   position: absolute;
-  top: 10rem;
+  top: 34rem;
+  left: 45rem;
+}
+
+#deleteBp {
+  background-color: #cf4843;
+  color: white;
+  padding: 10px 30px;
+  border: 1px solid black;
+  position: absolute;
+  top: 34rem;
+  left: 63rem;
+}
+
+#createBlueprint {
+  background-color: #14b2b8;
+  color: white;
+  padding: 10px 30px;
+  border: 1px solid black;
+  position: absolute;
+  top: 5rem;
   left: 45rem;
 }

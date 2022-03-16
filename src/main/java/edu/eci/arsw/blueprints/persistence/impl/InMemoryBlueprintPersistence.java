@@ -30,8 +30,8 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
     public InMemoryBlueprintPersistence() {
         //load stub data
         Point[] pts=new Point[]{new Point(140, 140),new Point(115, 115)};
-        Point[] pts1=new Point[]{new Point(10, 10),new Point(15, 10)};
-        Point[] pts2=new Point[]{new Point(14, 14),new Point(20, 20)};
+        Point[] pts1=new Point[]{new Point(150, 150),new Point(150, 300),new Point(300,300),new Point(300,150)};
+        Point[] pts2=new Point[]{new Point(14, 14),new Point(200, 200)};
         Blueprint bp=new Blueprint("Juan", "bp",pts);
         Blueprint bp1=new Blueprint("Nicolas", "bp1 ",pts1);
         Blueprint bp2=new Blueprint("Nicolas", "bp2 ",pts2);
