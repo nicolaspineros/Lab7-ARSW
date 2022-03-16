@@ -1,9 +1,9 @@
 var apiclient = (function() {
 
-	const URL = "blueprints/";
+	const URL = "http://localhost:8080/blueprints/";
 
 	var getBlueprintsByAuthor = function(name, callback) {		
-		$.get(
+		$.getJSON(
 			URL + name,
 			function(response) {
 				callback(response);
@@ -12,7 +12,7 @@ var apiclient = (function() {
 	};
 
 	var getBlueprintsByNameAndAuthor = function(author, name, callback) {
-		$.get(
+		$.getJSON(
 			URL + author + "/" + name,
 			function(response) {
 				callback(response);
@@ -20,9 +20,37 @@ var apiclient = (function() {
 		);
 	};
 
+	var updateBlueprint = function (blueprint, author, name) {
+		return $.ajax({
+		  url: "http://localhost:8080/blueprints/" + author + "/" + name,
+		  type: "PUT",
+		  data: JSON.stringify(blueprint),
+		  contentType: "application/json",
+		});
+	  };
+
+	var addNewBlueprint = function (blueprint) {
+		return $.ajax({
+			url: "http://localhost:8080/blueprints",
+			type: "POST",
+			data: JSON.stringify(blueprint),
+			contentType: "application/json",
+		});
+	};
+	
+	var deleteBlueprint = function (author, name) {
+		return $.ajax({
+			url: "http://localhost:8080/blueprints/" + author + "/" + name,
+			type: "DELETE",
+		});
+	};
+
 	return {
 		getBlueprintsByAuthor: getBlueprintsByAuthor,
-		getBlueprintsByNameAndAuthor: getBlueprintsByNameAndAuthor
+		getBlueprintsByNameAndAuthor: getBlueprintsByNameAndAuthor,
+		updateBlueprint: updateBlueprint,
+    	addNewBlueprint: addNewBlueprint,
+    	deleteBlueprint: deleteBlueprint,
 	};
 
 })();

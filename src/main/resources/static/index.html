@@ -13,7 +13,7 @@
     <script src="js/app.js"></script>
     <script src="js/apiclient.js"></script>
 </head>
-<body>
+<body onload="app.init()">
     <h1>Blueprints</h1>
     <div>
         <div>
@@ -38,6 +38,10 @@
             <div>
                 <h2 class="subtittle" id="current">Current Blueprint</h2>
                 <canvas class="canvas" id="canvasBp" width="500" height="500"></canvas>
+                <div class="btn-buttons">
+                    <button type="button" id="saveBp" onclick="app.updateBlueprint()">Save/Update</button>
+                    <button type="button" id="deleteBp" onclick="app.deleteBlueprint()">Delete</button>
+                </div>
             </div>            
         </div>
     </div>
